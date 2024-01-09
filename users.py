@@ -4,8 +4,7 @@ import requests
 class Users:
    
     # URL do serviço REST
-    #base_url = "https://jsonplaceholder.typicode.com/users/"
-    base_url = "http://localhost:5001/users/"
+    base_url = "https://jsonplaceholder.typicode.com/users/"
 
     def list(self):
         url = self.base_url
@@ -29,8 +28,8 @@ class Users:
         url = self.base_url+str(user_id)
         response = requests.delete(url)
 
-        if response.status_code == 200:
-            return response.json()
+        if response.status_code == 204:
+            return True
         else:
             raise ValueError("ID inválido")
 
