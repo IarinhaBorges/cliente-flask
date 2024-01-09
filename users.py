@@ -4,7 +4,7 @@ import requests
 class Users:
    
     # URL do serviço REST
-    base_url = "https://jsonplaceholder.typicode.com/users/"
+    base_url = "http://127.0.0.1:8000/users/"
 
     def list(self):
         url = self.base_url
@@ -15,17 +15,9 @@ class Users:
         else:
             raise ValueError("ID inválido")
 
-    def read(self, user_id):
-        url = self.base_url+str(user_id)
-        response = requests.get(url)
 
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise ValueError("ID inválido")
-
-    def delete(self, user_id):
-        url = self.base_url+str(user_id)
+    def delete(self, user_name):
+        url = self.base_url+str(user_name)
         response = requests.delete(url)
 
         if response.status_code == 204:
@@ -33,20 +25,20 @@ class Users:
         else:
             raise ValueError("ID inválido")
 
-    def create(self,user_data):
+    def create(self,user_name):
         url = self.base_url
 
-        response = requests.post(url, json=user_data)
+        response = requests.post(url, json=user_name)
 
         if response.status_code == 201:
             return response.json()
         else:
             raise ValueError("Problema na execução")
 
-    def update(self, user_id, user_data):
-        url = self.base_url+str(user_id)
+    def update(self, user_name):
+        url = self.base_url+str(user_name)
 
-        response = requests.patch(url, json=user_data)
+        response = requests.patch(url, json=user_name)
 
         if response.status_code == 200:
             return response.json()
